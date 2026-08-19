@@ -1,0 +1,1029 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>5FWORKSHOP - minime/小物桌</title>  
+    <link rel="icon" type="image/png" href="favicon/favicon-96x96.png" sizes="96x96" />
+    <link rel="icon" type="image/svg+xml" href="favicon/favicon.svg" />
+    <link rel="shortcut icon" href="favicon/favicon.ico" />
+    <link rel="apple-touch-icon" sizes="180x180" href="favicon/apple-touch-icon.png" />
+    <link rel="manifest" href="favicon/site.webmanifest" />
+    <meta name="apple-mobile-web-app-capable" content="yes">  
+    <meta name="description" content="[ 野營 X 器物 製造室 ]">
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://5fworkshop.com/">
+    <meta property="og:title" content="5FWORKSHOP">
+    <meta property="og:description" content="[ 野營 X 器物 製造室 ]">
+    <meta property="og:image" content="https://5fworkshop.com/img/5fworkshop-og.jpg">
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:url" content="https://5fworkshop.com/">
+    <meta name="twitter:title" content="5FWORKSHOP">
+    <meta name="twitter:description" content="[ 野營 X 器物 製造室 ]">
+    <meta name="twitter:image" content="https://5fworkshop.com/img/5fworkshop-og.jpg">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Special+Elite&family=Noto+Sans+TC:wght@400;700;900&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --primary-bg: #FFFDFA;
+            --accent-gold: #c9a961;
+            --text-dark: #1a1a1a;
+            --border-color: #666666;
+            --header-h: 60px;
+            --content-width: 50%;
+        }
+        
+        html {
+            overflow-y: scroll;
+            scroll-behavior: smooth;
+            -webkit-text-size-adjust: 100%;
+        }
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Special Elite', 'Noto Sans TC', "Microsoft JhengHei", sans-serif;
+            background: var(--primary-bg);
+            color: var(--text-dark);
+            line-height: 1.5;
+            overflow-x: hidden;
+            display: flex;
+            flex-direction: column;
+            min-height: 100vh;
+            -webkit-font-smoothing: antialiased;
+        }
+
+        header {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: var(--header-h);
+            background: rgba(255, 255, 255, 0.4);
+            backdrop-filter: blur(25px);
+            -webkit-backdrop-filter: blur(25px);
+            z-index: 2000;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 0 20px;
+        }
+
+        nav {
+            width: 100%;
+            max-width: 1400px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            position: relative;
+            height: 100%;
+        }
+
+        .floating-logo {
+            position: absolute;
+            left: 0;
+            top: 12px;
+            z-index: 3000;
+            text-decoration: none;
+            display: flex;
+            align-items: center;
+        }
+
+        .floating-logo img {
+            height: 70px;
+            width: auto;
+            display: block;
+            transition: height 0.3s ease-out;
+            filter: drop-shadow(0 2px 4px rgba(0,0,0,0.1));
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 3rem;
+            list-style: none;
+            align-items: center;
+        }
+
+        .nav-links a {
+            text-decoration: none;
+            color: var(--text-dark);
+            font-size: 1.3rem;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            padding: 2px 0;
+            border-bottom: 1.5px solid transparent;
+            transition: color 0.2s ease, border-bottom 0.2s ease;
+            line-height: 1.2;
+        }
+
+        .nav-links a:hover {
+            border-bottom: 1.5px solid var(--text-dark);
+        }
+
+        .menu-toggle {
+            display: none;
+            flex-direction: column;
+            gap: 6px;
+            cursor: pointer;
+            z-index: 3100;
+            position: absolute;
+            right: 0;
+            padding: 10px 5px;
+        }
+
+        .menu-toggle span {
+            width: 28px;
+            height: 2px;
+            background-color: var(--text-dark);
+            transition: 0.3s cubic-bezier(0.45, 0, 0.25, 1);
+        }
+
+        main {
+            padding: 0 20px 0 20px;
+            max-width: 1400px;
+            margin: 0 auto;
+            width: 100%;
+            flex: 1;
+        }
+        
+        .product-header-box {
+            padding-top: 4.3rem;		
+            width: var(--content-width);
+            margin: 0.5rem auto 0 auto;
+            text-align: left;
+        }
+        
+        .product-name {
+            font-family: 'Noto Sans TC', sans-serif;
+            font-size: 1.6rem;
+            letter-spacing: 0.05em;
+            font-weight: 900;
+            color: var(--text-dark);
+        }
+        
+        .hero-container {
+            position: relative;
+            width: var(--content-width);
+            margin: 0.5rem auto 0.5rem auto;
+        }
+        
+        .hero-section {
+            position: relative;
+            width: 100%;
+            aspect-ratio: 4 / 3;
+            background: #fdfdfd;
+            overflow: hidden;
+            border: 1px solid #eeeeee;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: grab;
+            touch-action: pan-y;
+        }
+        
+        .main-display-img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: opacity 0.3s ease-in-out;
+            pointer-events: none;
+            user-select: none;
+        }
+        
+        .image-counter {
+            position: absolute;
+            background: rgba(255, 255, 255, 0.8);
+            min-width: 50px;
+            height: 28px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 0.85rem;
+            font-weight: bold;
+            color: var(--text-dark);
+            border-radius: 2px;
+            z-index: 5;
+            letter-spacing: 1px;
+            pointer-events: none;
+            padding: 0 8px;
+        }
+        
+        .hero-section .image-counter {
+            top: 10px;
+            right: 10px;
+        }
+        
+        .nav-arrow {
+            position: absolute;
+            top: 50%;
+            transform: translateY(-50%);
+            background: rgba(255,255,255,0.8);
+            border: none;
+            width: 40px;
+            height: 40px;
+            cursor: pointer;
+            border-radius: 50%;
+            font-size: 1.2rem;
+            z-index: 10;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        
+        .arrow-prev {
+            left: -50px;
+        }
+        
+        .arrow-next {
+            right: -50px;
+        }
+
+        .gallery-wrapper {
+            width: var(--content-width);
+            margin: 0 auto;
+            overflow: hidden;
+            position: relative;
+        }
+        
+        .gallery-nav {
+            display: flex;
+            gap: 10px;
+            padding: 8px 2px;
+            overflow-x: auto;
+            scroll-behavior: smooth;
+            scrollbar-width: none;
+            -webkit-overflow-scrolling: touch;
+            cursor: grab;
+            user-select: none;
+            justify-content: flex-start;
+        }
+        
+        .gallery-nav::-webkit-scrollbar {
+            display: none;
+        }
+        
+        .thumb-box {
+            width: 44px;
+            height: 44px;
+            flex: 0 0 44px;
+            cursor: pointer;
+            border: 1px solid #eeeeee;
+            opacity: 1;
+            transition: border 0.2s ease;
+        }
+        
+        .thumb-box img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            pointer-events: none;
+            display: block;
+        }
+        
+        .thumb-box.active {
+            border: 3px solid var(--accent-gold);
+            z-index: 2;
+        }
+
+        .divider {
+            width: var(--content-width);
+            height: 1px;
+            background-color: #C9A961;
+            margin: 0.2rem auto;
+            margin-bottom: 1rem;
+        }
+
+        .product-info-section {
+            width: var(--content-width);
+            margin: 0 auto 1rem auto;
+            text-align: left;
+            color: var(--text-dark);
+            font-size: 0.9rem;
+            font-family: 'Noto Sans TC', sans-serif;
+            letter-spacing: 0.02em;
+        }
+        
+        .video-accordion {
+            margin-top: 1rem;
+            margin-bottom: 2rem;
+            border-radius: 4px;
+            overflow: hidden;
+        }
+        
+        .accordion-header {
+            width: 100%;
+            padding: 5px 15px;
+            background: #C9A961;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            cursor: pointer;
+            border: 0;
+            font-family: 'Noto Sans TC', sans-serif;
+            font-weight: 700;
+            font-size: 1rem;
+            color: var(--text-dark);
+            transition: background 0.3s;
+            margin-bottom: 0;
+        }
+        
+        .accordion-header:hover {
+            background: #d4b87a;
+        }
+        
+        .accordion-header .arrow {
+            font-size: 0.8rem;
+            transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+        
+        .video-accordion.active .arrow-indicator {
+            transform: rotate(180deg);
+        }
+        
+        .accordion-content {
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+            background: #000;
+        }
+        
+        .video-accordion.active .accordion-content {
+            max-height: 600px;
+        }
+        
+        .video-responsive {
+            position: relative;
+            padding-bottom: 56.25%;
+            height: 0;
+        }
+        
+        .video-responsive iframe {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            border: none;
+        }
+
+        .info-group {
+            margin-bottom: 2.5rem;
+        }
+        
+        .info-title {
+            font-weight: 700;
+            font-size: 1rem;
+            margin-bottom: 0.4rem;
+            display: block;
+        }
+        
+        .info-content {
+            white-space: pre-line;
+            margin-bottom: 0.5rem;
+        }
+        
+        .number-box {
+            border: 1px solid var(--accent-gold);
+            padding: 15px 5px;
+            background-color: #FFFDFA;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            width: 100%;
+            border-radius: 4px;
+            font-family: 'Special Elite', serif;
+            font-size: 0.9rem;
+            letter-spacing: 1.2px;
+            color: #262626;
+            margin-bottom: 1rem;
+        }
+        
+        .cust-image-container {
+            width: 100%;
+            text-align: center;
+            margin: 1rem 0;
+        }
+        
+        .cust-image-container img {
+            max-width: 100%;
+            height: auto;
+            display: inline-block;
+        }
+
+        .inner-divider {
+            width:95%;
+            height: 1px;
+            background-color: #C9A961;
+            margin: 1.2rem 0;
+            opacity: 1;
+        }
+
+        .get-yours-header {
+            position: relative;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-bottom: 1rem;
+            width: 100%;
+        }
+        
+        .get-yours-title {
+            font-family: 'Special Elite', serif;
+            font-size: 1.3rem;
+            color: var(--text-dark);
+            background-color: #FFFDFA;
+            padding: 0 10px;
+            position: relative;
+            z-index: 2;
+        }
+        
+        .get-yours-container {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 15px;
+            flex-wrap: wrap;
+            width: 100%;
+            margin: 0 auto;
+            margin-bottom: 5rem;
+        }
+        
+        .buy-btn {
+            text-decoration: none;
+            padding: 12px 20px;
+            border-radius: 3px;
+            font-size: 1rem;
+            transition: all 0.3s ease;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            min-width: 240px;
+            justify-content: center;
+            font-family: 'Noto Sans TC', sans-serif;
+            background: #000000;
+            color: #FFFFFF;
+            border: none;
+            font-weight: 700;
+        }
+        
+        .buy-btn:hover {
+            background: #FE0000;
+            color: #FFFDFA;
+        }
+        
+        .reserve-btn {
+            padding: 8px 18px;
+            border-radius: 30px;
+            font-size: 0.95rem;
+            transition: all 0.3s ease;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            font-family: 'Noto Sans TC', sans-serif;
+            background: var(--accent-gold);
+            color: var(--text-dark);
+            border: 2px solid var(--accent-gold);
+            font-weight: 700;
+            cursor: pointer;
+            margin: 1rem 0 0.5rem 0;
+        }
+        
+        .reserve-btn:hover {
+            background: #d4b87a;
+            border-color: #d4b87a;
+            transform: translateY(-2px);
+            box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+        }
+        
+        .social-footer-wrapper {
+            width: 100%;
+            padding: 4rem 0 1rem 0;
+            background-color: var(--primary-bg);
+        }
+        
+        .social-links {
+            display: flex;
+            justify-content: center;
+            gap: 35px;
+            width: 100%;
+        }
+        
+        .social-links img {
+            width: 30px;
+            height: 30px;
+            opacity: 0.8;
+            transition: all 0.3s;
+        }
+        
+        .social-links a:hover img {
+            opacity: 1;
+            transform: scale(1.1);
+        }
+        
+        .lightbox {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.94);
+            z-index: 2147483647;
+            display: none;
+            align-items: center;
+            justify-content: center;
+            opacity: 0;
+            transition: opacity 0.4s ease;
+            backdrop-filter: blur(5px);
+            cursor: pointer;
+        }
+        
+        .lightbox.active {
+            display: flex;
+            opacity: 1;
+        }
+        
+        .lightbox-container {
+            position: relative;
+            max-width: 95vw;
+            max-height: 90vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: grab;
+            touch-action: none;
+        }
+        
+        .lightbox img {
+            max-width: 95vw;
+            max-height: 90vh;
+            object-fit: contain;
+            pointer-events: none;
+            user-select: none;
+            -webkit-user-drag: none;
+        }
+        
+        .lightbox .image-counter {
+            top: 20px;
+            right: 20px;
+        }
+
+        footer {
+            padding: 1.3rem 0;
+            text-align: center;
+        }
+        
+        footer p {
+            font-size: 0.85rem;
+            color: #262626;
+        }
+
+        @media (max-width: 1024px) {
+            nav,
+            .product-header-box,
+            .hero-container,
+            .gallery-wrapper,
+            .divider,
+            .product-info-section {
+                width: 97%;
+            }
+            
+            header {
+                padding: 0 15px;
+            }
+            
+            .floating-logo {
+                left: 0;
+                top: 50%;
+                transform: translateY(-50%);
+            }
+            
+            .floating-logo img {
+                height: 38px !important;
+            }
+            
+            .menu-toggle {
+                display: flex;
+                position: absolute;
+                right: 0;
+                top: 50%;
+                transform: translateY(-50%);
+                z-index: 10000000;
+            }
+            
+            .nav-links {
+                position: fixed;
+                top: 0;
+                right: -100%;
+                width: 100%;
+                height: 100vh;
+                background: rgba(255, 255, 255, 0.98);
+                backdrop-filter: blur(15px);
+                flex-direction: column;
+                justify-content: flex-start;
+                padding-top: 120px;
+                gap: 2.5rem;
+                transition: 0.4s cubic-bezier(0.165, 0.84, 0.44, 1);
+                z-index: 9999999;
+            }
+            
+            .nav-links.active {
+                right: 0;
+            }
+            
+            .nav-links a {
+                font-size: 1.6rem;
+                font-weight: 700;
+                letter-spacing: 4px;
+            }
+
+            .menu-toggle.active span:nth-child(1) {
+                transform: translateY(8px) rotate(45deg);
+            }
+            
+            .menu-toggle.active span:nth-child(2) {
+                opacity: 0;
+            }
+            
+            .menu-toggle.active span:nth-child(3) {
+                transform: translateY(-8px) rotate(-45deg);
+            }
+
+            .arrow-prev {
+                left: 5px;
+            }
+            
+            .arrow-next {
+                right: 5px;
+            }
+            
+            .product-name {
+                font-size: 1.8rem;
+            }
+            
+            .product-info-section {
+                font-size: 1.05rem;
+            }
+            
+            .info-title {
+                font-size: 1.15rem;
+            }
+            
+            .number-box {
+                font-size: 1.05rem;
+                padding: 30px 15px;
+            }
+            
+            .buy-btn {
+                width: 100%;
+                min-width: unset;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header id="header">
+        <nav>
+            <a href="index.html" class="floating-logo" aria-label="回到首頁">
+                <img src="img/logo.webp" alt="5FWORKSHOP Logo">
+            </a>
+            <ul class="nav-links" id="navLinks">
+                <li><a href="index.html#top">TOP</a></li>
+                <li><a href="index.html#works">WORKS</a></li>
+                <li><a href="index.html#about">ABOUT</a></li>
+            </ul>
+            <div class="menu-toggle" id="menuToggle" aria-label="選單開關">
+                <span></span>
+                <span></span>
+                <span></span>
+            </div>
+        </nav>
+    </header>
+
+    <main>
+        <div class="product-header-box">
+            <h1 class="product-name">minime / 小物桌</h1>
+        </div>
+
+        <div class="hero-container">
+            <button class="nav-arrow arrow-prev" id="prevBtn" aria-label="上一張圖片">&#10094;</button>
+            <div class="hero-section" id="heroTrigger">
+                <div class="image-counter" id="imgCounter">1 / 1</div>
+                <img src="" id="mainImage" class="main-display-img" alt="minime 小物桌">
+            </div>
+            <button class="nav-arrow arrow-next" id="nextBtn" aria-label="下一張圖片">&#10095;</button>
+        </div>
+
+        <div class="gallery-wrapper">
+            <div class="gallery-nav" id="thumbNav"></div>
+            <div class="video-accordion" id="videoAccordion">
+                <button class="accordion-header" id="accordionToggle" aria-expanded="false">
+                    <span class="arrow"></span>
+                    <span>DEMO</span>
+                    <span class="arrow arrow-indicator">▼</span>
+                </button>
+                <div class="accordion-content">
+                    <div class="video-responsive">
+                        <iframe 
+                            src="https://www.youtube.com/embed/JHLYhzHoWiQ?enablejsapi=1&origin=https://5fworkshop.com" 
+                            title="minime 小物桌展示影片" 
+                            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" 
+                            allowfullscreen>
+                        </iframe>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="product-info-section">
+            <div class="number-box">
+                <span class="info-title">● 客製專屬編號 ●</span>
+                <span style="font-size: 1em; color: #000; font-weight: 700;">〝每一組編號僅製作一張桌子〞</span>
+                <div class="cust-image-container">
+                    <img src="img/minime/content_1.webp" alt="客製編號示意圖" loading="lazy">
+                </div>
+                <span style="font-size: 1em; color: #000; font-weight: 700;">[已預定編號]</span>
+				<span style="font-size: 1em; color: #000; font-weight: 400;">. 0000 . 0001 . 0219 . 0614 . 0725 . 0924 . 1104 . 1982 .</span>
+                <button class="reserve-btn" id="reserveBtn" onclick="openTawkChat()">預定專屬編號</button>
+            </div>
+            
+            <div class="get-yours-container">
+                <a href="https://myship.7-11.com.tw/general/detail/GM2602144117706" target="_blank" rel="noopener noreferrer" class="buy-btn">
+                    <span>台 灣 — 7-11賣貨便</span>
+                </a>
+                <a href="https://www.creema.jp/item/20434462/detail" target="_blank" rel="noopener noreferrer" class="buy-btn">
+                    <span>日 本 — Creema JP</span>
+                </a>
+            </div>
+            
+            <div class="info-group">
+                <span class="info-title">■ 商品資訊</span>
+                <div class="info-content">‧商品材質:相思木、乳膠(彈性繩)</div>
+                <div class="info-content">‧商品重量:250 公克 ±3%</div>
+                <div class="info-content">‧商品尺寸:</div>
+                <div class="info-content">&emsp;–使用時:約 220 × 280 × 70(高)毫米</div>
+                <div class="info-content">&emsp;–收納時:約 110 × 280 × 20(高)毫米</div>
+                <div class="info-content">‧靜態承重:10 公斤 (非水平狀態使用時,建議承重不超過 5 公斤)</div>
+                <div class="info-content">‧顏色花紋:天然實木花紋與色澤。</div>
+                <div class="info-content">‧原產地:台灣</div>
+            </div>
+
+            <div class="info-group">
+                <span class="info-title">■ 安全注意事項</span>
+                <div class="info-content">‧若磨損、水漬、高溫等因素會產生刮痕、掉色與染色現象</div>
+                <div class="info-content">‧請勿靠近火源與高溫物體使用</div>
+                <div class="info-content">‧桌面請勿放置超過 10 公斤之物品</div>
+                <div class="info-content">‧請於平整地面上使用,以避免桌面物品傾倒</div>
+            </div>
+
+            <div class="info-group">
+                <span class="info-title">■ 保養方式</span>
+                <div class="info-content">‧為避免木材變質、龜裂或發霉,請勿長時間置於高溫與潮濕環境</div>
+                <div class="info-content">‧表面如有髒汙,請以軟布沾清水擦拭,再以乾布擦乾即可</div>
+                <div class="info-content">‧收納前請確實擦乾表面髒汙與水漬,並以海綿均勻塗抹木蠟油進行保養</div>
+                <div class="info-content">‧使用過程中如產生刮痕,可使用木作砂紙輕磨後,再塗抹木蠟油保養</div>
+                <div class="info-content">‧標誌與專屬編號為手工刷印,清潔與保養時請避免用力摩擦</div>
+                <div class="info-content">‧若桌板出現翹曲情形,可於塗抹木蠟油後,放置於平整處並以重物加壓一段時間</div>
+            </div>
+        </div>
+    </main>
+
+    <div class="social-footer-wrapper">
+        <div class="social-links">
+            <a href="https://www.instagram.com/5fworkshop" target="_blank" rel="noopener noreferrer" aria-label="Instagram">
+                <img src="img/instagram.svg" alt="Instagram">
+            </a>
+            <a href="https://lin.ee/PsVtYEHu" target="_blank" rel="noopener noreferrer" aria-label="Line">
+                <img src="img/line.svg" alt="Line">
+            </a>
+        </div>
+    </div>
+
+    <div class="lightbox" id="lightbox">
+        <div class="lightbox-container" id="lboxContainer">
+            <div class="image-counter" id="imgCounterLbox">1 / 1</div>
+            <img src="" id="lightboxImg" alt="放大檢視">
+        </div>
+    </div>
+
+    <footer>
+        <p>© 2026 5FWORKSHOP. ALL RIGHTS RESERVED.</p>
+    </footer>
+
+    <script>
+        const menuToggle = document.getElementById('menuToggle');
+        const navLinks = document.getElementById('navLinks');
+        const navItems = document.querySelectorAll('.nav-links a');
+
+        menuToggle.addEventListener('click', () => {
+            menuToggle.classList.toggle('active');
+            const isActive = navLinks.classList.toggle('active');
+            document.body.style.overflow = isActive ? 'hidden' : 'auto';
+
+            if (typeof Tawk_API !== 'undefined') {
+                if (isActive) {
+                    Tawk_API.hideWidget();
+                } else {
+                    Tawk_API.showWidget();
+                }
+            }
+        });
+
+        navItems.forEach(item => {
+            item.addEventListener('click', () => {
+                menuToggle.classList.remove('active');
+                navLinks.classList.remove('active');
+                document.body.style.overflow = 'auto';
+                
+                if (typeof Tawk_API !== 'undefined') {
+                    Tawk_API.showWidget();
+                }
+            });
+        });
+
+        const videoAccordion = document.getElementById('videoAccordion');
+        const accordionToggle = document.getElementById('accordionToggle');
+
+        accordionToggle.addEventListener('click', () => {
+            const isActive = videoAccordion.classList.toggle('active');
+            accordionToggle.setAttribute('aria-expanded', isActive);
+        });
+
+        const imageFolder = 'img/minime/';
+        const imageFiles = [
+            'img_1.webp', 'img_2.webp', 'img_3.webp', 'img_4.webp',
+            'img_5.webp', 'img_6.webp', 'img_7.webp', 'img_8.webp',
+            'img_9.webp', 'img_10.webp', 'img_11.webp'
+        ];
+        let imageList = [];
+        let currentIndex = 0;
+        
+        const mainImg = document.getElementById('mainImage');
+        const thumbNav = document.getElementById('thumbNav');
+        const imgCounter = document.getElementById('imgCounter');
+        const imgCounterLbox = document.getElementById('imgCounterLbox');
+        const lboxContainer = document.getElementById('lboxContainer');
+        const heroTrigger = document.getElementById('heroTrigger');
+        const lightbox = document.getElementById('lightbox');
+
+        function initGallery() {
+            imageList = imageFiles.sort((a, b) => a.localeCompare(b, undefined, {numeric: true}));
+            
+            imageList.forEach((file, index) => {
+                const thumb = document.createElement('div');
+                thumb.className = 'thumb-box';
+                thumb.id = `thumb-${index}`;
+                thumb.onclick = () => changeImage(index);
+                thumb.setAttribute('role', 'button');
+                thumb.setAttribute('aria-label', `切換到第 ${index + 1} 張圖片`);
+                thumb.innerHTML = `<img src="${imageFolder}${file}" alt="縮圖 ${index + 1}">`;
+                thumbNav.appendChild(thumb);
+            });
+            
+            enableDragScroll();
+            bindSwipeEvents(heroTrigger, true);
+            bindSwipeEvents(lboxContainer, false);
+            changeImage(0);
+        }
+
+        function changeImage(index) {
+            if (index < 0) index = imageList.length - 1;
+            if (index >= imageList.length) index = 0;
+            
+            currentIndex = index;
+            const newSrc = imageFolder + imageList[currentIndex];
+            
+            mainImg.src = newSrc;
+            mainImg.alt = `minime 小物桌圖片 ${currentIndex + 1}`;
+            document.getElementById('lightboxImg').src = newSrc;
+            
+            const counterText = `${currentIndex + 1} / ${imageList.length}`;
+            imgCounter.innerText = counterText;
+            imgCounterLbox.innerText = counterText;
+            
+            document.querySelectorAll('.thumb-box').forEach(el => el.classList.remove('active'));
+            const activeThumb = document.getElementById(`thumb-${currentIndex}`);
+            activeThumb?.classList.add('active');
+            activeThumb?.scrollIntoView({ behavior: 'smooth', block: 'nearest', inline: 'center' });
+        }
+
+        function bindSwipeEvents(element, isHero) {
+            let startX = 0;
+            let startTime = 0;
+            let isDragging = false;
+            const threshold = 50;
+            const timeLimit = 250;
+
+            const start = (x) => {
+                startX = x;
+                startTime = Date.now();
+                isDragging = true;
+            };
+
+            const end = (x) => {
+                if (!isDragging) return;
+                const diffX = startX - x;
+                const duration = Date.now() - startTime;
+
+                if (Math.abs(diffX) < 10 && duration < timeLimit) {
+                    if (isHero) lightbox.classList.add('active');
+                } else if (Math.abs(diffX) > threshold) {
+                    changeImage(diffX > 0 ? currentIndex + 1 : currentIndex - 1);
+                }
+                isDragging = false;
+            };
+
+            element.addEventListener('mousedown', (e) => {
+                e.preventDefault();
+                start(e.pageX);
+            });
+            
+            window.addEventListener('mouseup', (e) => {
+                if(isDragging) end(e.pageX);
+            });
+            
+            element.addEventListener('touchstart', (e) => {
+                start(e.touches[0].pageX);
+            }, {passive: true});
+            
+            element.addEventListener('touchend', (e) => {
+                end(e.changedTouches[0].pageX);
+            });
+        }
+
+        function enableDragScroll() {
+            let isDown = false;
+            let startX;
+            let scrollLeft;
+            
+            thumbNav.addEventListener('mousedown', (e) => {
+                isDown = true;
+                startX = e.pageX - thumbNav.offsetLeft;
+                scrollLeft = thumbNav.scrollLeft;
+                thumbNav.style.scrollBehavior = 'auto';
+            });
+            
+            thumbNav.addEventListener('mouseleave', () => {
+                isDown = false;
+            });
+            
+            thumbNav.addEventListener('mouseup', () => {
+                isDown = false;
+                thumbNav.style.scrollBehavior = 'smooth';
+            });
+            
+            thumbNav.addEventListener('mousemove', (e) => {
+                if (!isDown) return;
+                e.preventDefault();
+                const x = e.pageX - thumbNav.offsetLeft;
+                thumbNav.scrollLeft = scrollLeft - (x - startX) * 2;
+            });
+        }
+
+        lightbox.onclick = (e) => {
+            if (e.target === lightbox) lightbox.classList.remove('active');
+        };
+        
+        document.getElementById('nextBtn').onclick = (e) => {
+            e.stopPropagation();
+            changeImage(currentIndex + 1);
+        };
+        
+        document.getElementById('prevBtn').onclick = (e) => {
+            e.stopPropagation();
+            changeImage(currentIndex - 1);
+        };
+        
+        initGallery();
+        
+        function openTawkChat() {
+            if (typeof Tawk_API !== 'undefined' && Tawk_API.maximize) {
+                Tawk_API.maximize();
+            } else {
+                setTimeout(() => {
+                    if (typeof Tawk_API !== 'undefined' && Tawk_API.maximize) {
+                        Tawk_API.maximize();
+                    }
+                }, 1000);
+            }
+        }
+    </script>
+    <script type="text/javascript">
+        var Tawk_API=Tawk_API||{}, Tawk_LoadStart=new Date();
+        (function(){
+            var s1=document.createElement("script"),s0=document.getElementsByTagName("script")[0];
+            s1.async=true;
+            s1.src='https://embed.tawk.to/6992b11559a4151c386c35c5/1jhig7fot';
+            s1.charset='UTF-8';
+            s1.setAttribute('crossorigin','*');
+            s0.parentNode.insertBefore(s1,s0);
+        })();
+    </script>
+</body>
+</html>

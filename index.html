@@ -1,0 +1,759 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>5FWORKSHOP</title>
+    <link rel="icon" type="image/png" href="favicon/favicon-96x96.png" sizes="96x96" />
+    <link rel="icon" type="image/svg+xml" href="favicon/favicon.svg" />
+    <link rel="shortcut icon" href="favicon/favicon.ico" />
+    <link rel="apple-touch-icon" sizes="180x180" href="favicon/apple-touch-icon.png" />
+    <link rel="manifest" href="favicon/site.webmanifest" />
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="description" content="[ 野營 X 器物 製造室 ]">
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://5fworkshop.com/">
+    <meta property="og:title" content="5FWORKSHOP">
+    <meta property="og:description" content="[ 野營 X 器物 製造室 ]">
+    <meta property="og:image" content="https://5fworkshop.com/img/5fworkshop-og.jpg">
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:url" content="https://5fworkshop.com/">
+    <meta name="twitter:title" content="5FWORKSHOP">
+    <meta name="twitter:description" content="[ 野營 X 器物 製造室 ]">
+    <meta name="twitter:image" content="https://5fworkshop.com/img/5fworkshop-og.jpg">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Special+Elite&family=Noto+Sans+TC:wght@400;700;900&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --primary-bg: #FFFDFA;
+            --accent-gold: #c9a961;
+            --text-dark: #1a1a1a;
+            --border-color: #666666;
+            --header-h: 60px;
+        }
+        
+        html {
+            overflow-y: scroll;
+            scroll-behavior: smooth;
+            -webkit-text-size-adjust: 100%;
+        }
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Special Elite', 'Noto Sans TC', "Microsoft JhengHei", sans-serif;
+            background: var(--primary-bg);
+            color: var(--text-dark);
+            line-height: 1.5;
+            overflow-x: hidden;
+            display: flex;
+            flex-direction: column;
+            min-height: 100vh;
+            -webkit-font-smoothing: antialiased;
+        }
+
+        header {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: var(--header-h);
+            background: rgba(255, 255, 255, 0.4);
+            backdrop-filter: blur(25px);
+            -webkit-backdrop-filter: blur(25px);
+            z-index: 2000;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 0 20px;
+        }
+
+        nav {
+            width: 100%;
+            max-width: 1400px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            position: relative;
+            height: 100%;
+        }
+
+        .floating-logo {
+            position: absolute;
+            left: 0;
+            top: 12px;
+            z-index: 3000;
+            text-decoration: none;
+            display: flex;
+            align-items: center;
+        }
+
+        .floating-logo img {
+            height: 70px;
+            width: auto;
+            display: block;
+            transition: height 0.3s ease-out;
+            filter: drop-shadow(0 2px 4px rgba(0,0,0,0.1));
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 3rem;
+            list-style: none;
+            align-items: center;
+        }
+
+        .nav-links a {
+            text-decoration: none;
+            color: var(--text-dark);
+            font-size: 1.3rem;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            padding: 2px 0;
+            border-bottom: 1.5px solid transparent;
+            transition: color 0.2s ease, border-bottom 0.2s ease;
+            line-height: 1.2;
+        }
+
+        .nav-links a:hover {
+            border-bottom: 1.5px solid var(--text-dark);
+        }
+
+        .menu-toggle {
+            display: none;
+            flex-direction: column;
+            gap: 6px;
+            cursor: pointer;
+            z-index: 3100;
+            position: absolute;
+            right: 0;
+            padding: 10px 5px;
+        }
+
+        .menu-toggle span {
+            width: 28px;
+            height: 2px;
+            background-color: var(--text-dark);
+            transition: 0.3s cubic-bezier(0.45, 0, 0.25, 1);
+        }
+
+        main {
+           padding-left: 20px;
+           padding-right: 20px;
+           max-width: 1400px;
+            margin: 0 auto;
+           width: 100%;
+           flex: 1;
+        }
+        
+        .hero-container {
+            position: relative;
+            width: 58%;
+            margin: 0.5rem auto 0.5rem auto;
+        }
+        
+        .hero-section {
+            position: relative;
+            width: 100%;
+            aspect-ratio: 4 / 3;
+            background: #fdfdfd;
+            overflow: hidden;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: grab;
+            touch-action: pan-y;
+        }
+        
+        .hero-section:active {
+            cursor: grabbing;
+        }
+
+        .hero-slider {
+            display: flex;
+            width: 100%;
+            height: 100%;
+            transition: transform 0.8s cubic-bezier(0.45, 0, 0.25, 1);
+            will-change: transform;
+        }
+
+        .hero-slider img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            flex-shrink: 0;
+            user-select: none;
+            -webkit-user-drag: none;
+        }
+        
+        .btn-more {
+            position: absolute;
+            bottom: 45px;
+            left: 50%;
+            transform: translateX(-50%);
+            padding: 8px 24px;
+            border-radius: 25px;
+            background: rgba(255, 255, 255, 0.5);
+            backdrop-filter: blur(4px);
+            border: 1px solid rgba(255, 255, 255, 0.5);
+            color: var(--text-dark);
+            text-decoration: none;
+            font-size: 0.85rem;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            z-index: 15;
+            transition: all 0.3s ease;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        
+        .btn-more:hover {
+            background: rgba(255, 255, 255, 1);
+            transform: translateX(-50%) translateY(-5px);
+            box-shadow: 0 10px 20px rgba(0,0,0,0.1);
+        }
+        
+        .dot-container {
+            position: absolute;
+            bottom: 15px;
+            left: 50%;
+            transform: translateX(-50%);
+            display: flex;
+            gap: 8px;
+            z-index: 10;
+        }
+        
+        .dot {
+            width: 8px;
+            height: 8px;
+            border-radius: 50%;
+            background: rgba(0,0,0,0.15);
+            cursor: pointer;
+            transition: transform 0.2s;
+        }
+        
+        .dot.active {
+            background: var(--accent-gold);
+            transform: scale(1.2);
+        }
+        
+        .nav-arrow {
+            position: absolute;
+            top: 50%;
+            transform: translateY(-50%);
+            background: rgba(255,255,255,0.8);
+            border: none;
+            width: 40px;
+            height: 40px;
+            cursor: pointer;
+            border-radius: 50%;
+            font-size: 1.2rem;
+            z-index: 10;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: opacity 0.3s ease;
+        }
+        
+        .nav-arrow:disabled {
+            opacity: 0.2;
+            cursor: not-allowed;
+        }
+        
+        .arrow-prev {
+            left: -60px;
+        }
+        
+        .arrow-next {
+            right: -60px;
+        }
+
+        .section-wrapper {
+            width: 58%;
+            margin: 0 auto;
+        }
+        
+        section {
+            padding-top: 2.8rem;
+            padding-bottom: 1rem;
+            width: 100%;
+            scroll-margin-top: 20px;
+        }
+        
+        #top {
+            padding-top: 5rem;
+        }
+        
+        .section-header {
+            text-align: left;
+            margin-bottom: 0.5rem;
+            position: relative;
+        }
+        
+        .section-header h2 {
+            font-family: 'Special Elite', serif;
+            font-size: 1.3rem;
+            letter-spacing: 4px;
+            color: var(--text-dark);
+            display: inline-block;
+            padding-bottom: 3px;
+        }
+        
+        #works {
+            padding-bottom: 4rem;
+        }
+        
+        .gallery-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 30px 30px;
+            width: 100%;
+        }
+        
+        .work-item {
+            text-decoration: none;
+            color: inherit;
+            display: flex;
+            flex-direction: column;
+            width: 100%;
+            transition: all 0.4s ease;
+        }
+        
+        .work-item.disabled {
+            cursor: default;
+            pointer-events: none;
+        }
+        
+        .work-image-box {
+            width: 100%;
+            aspect-ratio: 4/3;
+            overflow: hidden;
+            background: #fafafa;
+        }
+        
+        .work-image-box img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.6s cubic-bezier(0.165, 0.84, 0.44, 1);
+        }
+        
+        .work-item:not(.disabled):hover img {
+            transform: scale(1.1);
+        }
+        
+        #about {
+            padding-bottom: 0.1rem;
+        }
+        
+        .about-image {
+            width: 100%;
+            margin-bottom: 1.5rem;
+            display: block;
+            border-radius: 20px;
+        }
+        
+        .about-text-section {
+            width: 90%;
+            text-align: center;
+            margin: 0 auto;
+        }
+        
+        .slogan {
+            font-size: 0.9rem;
+            line-height: 1.5;
+            margin-bottom: 1.2rem;
+            word-break: keep-all;
+            text-align: center;
+            color: var(--text-dark);
+            font-family: 'Noto Sans TC', sans-serif;
+            letter-spacing: 0.02em;
+        }
+        
+        .social-footer-wrapper {
+            width: 100%;
+            padding: 4rem 0 1rem 0;
+            background-color: var(--primary-bg);
+        }
+        
+        .social-links {
+            display: flex;
+            justify-content: center;
+            gap: 35px;
+            width: 100%;
+        }
+        
+        .social-links img {
+            width: 30px;
+            height: 30px;
+            opacity: 0.8;
+            transition: all 0.3s;
+        }
+        
+        .social-links a:hover img {
+            opacity: 1;
+            transform: scale(1.1);
+        }
+
+        footer {
+            padding: 1.3rem 0;
+            text-align: center;
+        }
+        
+        footer p {
+            font-size: 0.85rem;
+            color: #262626;
+        }
+
+        @media (max-width: 1024px) {
+            nav,
+            .hero-container,
+            .section-wrapper {
+                width: 97%;
+            }
+            
+            header {
+                padding: 0 15px;
+            }
+            
+            .floating-logo {
+                left: 0;
+                top: 50%;
+                transform: translateY(-50%);
+            }
+            
+            .floating-logo img {
+                height: 38px !important;
+            }
+            
+            .menu-toggle {
+                display: flex;
+                position: absolute;
+                right: 0;
+                top: 50%;
+                transform: translateY(-50%);
+                z-index: 10000000;
+            }
+            
+            .nav-links {
+                position: fixed;
+                top: 0;
+                right: -100%;
+                width: 100%;
+                height: 100vh;
+                background: rgba(255, 255, 255, 0.98);
+                backdrop-filter: blur(15px);
+                flex-direction: column;
+                justify-content: flex-start;
+                padding-top: 120px;
+                gap: 2.5rem;
+                transition: 0.4s cubic-bezier(0.165, 0.84, 0.44, 1);
+                z-index: 9999999;
+            }
+            
+            .nav-links.active {
+                right: 0;
+            }
+            
+            .nav-links a {
+                font-size: 1.6rem;
+                font-weight: 700;
+                letter-spacing: 4px;
+            }
+
+            .menu-toggle.active span:nth-child(1) {
+                transform: translateY(8px) rotate(45deg);
+            }
+            
+            .menu-toggle.active span:nth-child(2) {
+                opacity: 0;
+            }
+            
+            .menu-toggle.active span:nth-child(3) {
+                transform: translateY(-8px) rotate(-45deg);
+            }
+
+            .arrow-prev {
+                left: 10px;
+            }
+            
+            .arrow-next {
+                right: 10px;
+            }
+            
+            .gallery-grid {
+                grid-template-columns: repeat(2, 1fr);
+                gap: 15px 12px;
+            }
+            
+            .btn-more {
+                bottom: 15px !important;
+            }
+            
+            .slogan {
+                font-size: 1.05rem;
+                margin-bottom: 1rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header id="header">
+        <nav>
+            <a href="index.html" class="floating-logo" aria-label="回到首頁">
+                <img src="img/logo.webp" alt="5FWORKSHOP Logo">
+            </a>
+            <ul class="nav-links" id="navLinks">
+                <li><a href="#top">TOP</a></li>
+                <li><a href="#works">WORKS</a></li>
+                <li><a href="#about">ABOUT</a></li>
+            </ul>
+            <div class="menu-toggle" id="menuToggle" aria-label="選單開關">
+                <span></span>
+                <span></span>
+                <span></span>
+            </div>
+        </nav>
+    </header>
+
+    <main>
+        <section id="top">
+            <div class="hero-container">
+                <button class="nav-arrow arrow-prev" id="prevBtn" aria-label="上一張">&#10094;</button>
+                <div class="hero-section" id="swipeArea">
+                    <div class="hero-slider" id="heroSlider"></div>
+                    <a href="works_minime.html" class="btn-more" id="moreLink">more</a>
+                    <div class="dot-container" id="dotContainer"></div>
+                </div>
+                <button class="nav-arrow arrow-next" id="nextBtn" aria-label="下一張">&#10095;</button>
+            </div>
+        </section>
+
+        <div class="section-wrapper">
+            <section id="works">
+                <div class="section-header">
+                    <h2>WORKS</h2>
+                </div>
+                <div class="gallery-grid">
+                    <a href="works_minime.html" class="work-item">
+                        <div class="work-image-box">
+                            <img src="img/minime/cover.webp" alt="minime 小物桌" loading="lazy">
+                        </div>
+                    </a>
+					<a  class="work-item">
+                        <div class="work-image-box">
+                            <img src="img/akaribuddy/akaribuddy_cover.webp" alt="akaribuddy" loading="lazy">
+                        </div>
+					</a>
+					<a  class="work-item">
+                        <div class="work-image-box">
+                            <img src="img/q-rack/q-rack_cover.webp" alt="Q-Rack" loading="lazy">
+                        </div>
+					</a>
+                </div>
+            </section>
+
+            <section id="about">
+                <div class="section-header">
+                    <h2>ABOUT</h2>
+                </div>
+                <img src="img/about.webp" alt="關於 5FWORKSHOP" class="about-image" loading="lazy">
+                <div class="about-text-section">
+                    <p class="slogan">【 5FWORKSHOP — 野營 X 器物 製造室 】</p>
+                    <p class="slogan">這是一個從2025年起開啟的小計畫<br>一邊做、一邊亂試</p>
+                    <p class="slogan">沒有標準答案,也沒有什麼「業界公式」<br>單純想做出實用也有趣的作品</p>
+                    <p class="slogan">每一件作品,都是一次實驗<br>有時靈感爆發,有時純粹是在跟材料吵架</p>
+                    <p class="slogan">研究功能、調整造型、測試材質<br>最後留下來的,都是我喜歡的作品</p>
+                    <p class="slogan">希望能讓你感到奇妙、有趣<br>如果能讓你會心一笑就更好了</p>
+                </div>
+            </section>
+        </div>
+    </main>
+
+    <div class="social-footer-wrapper">
+        <div class="social-links">
+            <a href="https://www.instagram.com/5fworkshop" target="_blank" rel="noopener noreferrer" aria-label="Instagram">
+                <img src="img/instagram.svg" alt="Instagram">
+            </a>
+            <a href="https://lin.ee/PsVtYEHu" target="_blank" rel="noopener noreferrer" aria-label="Line">
+                <img src="img/line.svg" alt="Line">
+            </a>
+        </div>
+    </div>
+
+    <footer>
+        <p>© 2026 5FWORKSHOP. ALL RIGHTS RESERVED.</p>
+    </footer>
+
+    <script>
+        const menuToggle = document.getElementById('menuToggle');
+        const navLinks = document.getElementById('navLinks');
+        const navItems = document.querySelectorAll('.nav-links a');
+
+        menuToggle.addEventListener('click', () => {
+            menuToggle.classList.toggle('active');
+            const isActive = navLinks.classList.toggle('active');
+            document.body.style.overflow = isActive ? 'hidden' : 'auto';
+
+            if (typeof Tawk_API !== 'undefined') {
+                if (isActive) {
+                    Tawk_API.hideWidget();
+                } else {
+                    Tawk_API.showWidget();
+                }
+            }
+        });
+
+        navItems.forEach(item => {
+            item.addEventListener('click', () => {
+                menuToggle.classList.remove('active');
+                navLinks.classList.remove('active');
+                document.body.style.overflow = 'auto';
+                
+
+                if (typeof Tawk_API !== 'undefined') {
+                    Tawk_API.showWidget();
+                }
+            });
+        });
+
+        const imageFolder = 'img/index/';
+        const imageData = [
+            { file: 'test.png', url: 'works_minime.html' },
+        ];
+
+        let currentIndex = 0;
+        let autoPlayTimer = null;
+        let isReversing = false;
+        
+        const heroSlider = document.getElementById('heroSlider');
+        const moreLink = document.getElementById('moreLink');
+        const dotContainer = document.getElementById('dotContainer');
+        const swipeArea = document.getElementById('swipeArea');
+        const prevBtn = document.getElementById('prevBtn');
+        const nextBtn = document.getElementById('nextBtn');
+
+        function initGallery() {
+            if (imageData.length === 0) return;
+            
+            imageData.forEach((item, index) => {
+                const img = document.createElement('img');
+                img.src = imageFolder + item.file;
+                img.alt = `輪播圖片 ${index + 1}`;
+                heroSlider.appendChild(img);
+                
+                if (imageData.length > 1) {
+                    const dot = document.createElement('div');
+                    dot.className = 'dot';
+                    dot.onclick = () => manualChange(index);
+                    dot.setAttribute('aria-label', `切換到第 ${index + 1} 張`);
+                    dotContainer.appendChild(dot);
+                }
+            });
+
+            if (imageData.length <= 1) {
+                [prevBtn, nextBtn, dotContainer].forEach(el => el.style.display = 'none');
+            } else {
+                enableSwipe();
+                startTimer();
+            }
+            
+            updateDisplay();
+        }
+
+        function updateDisplay() {
+            const offset = -currentIndex * 100;
+            heroSlider.style.transform = `translateX(${offset}%)`;
+            moreLink.href = imageData[currentIndex].url;
+
+            const dots = document.querySelectorAll('.dot');
+            dots.forEach((dot, idx) => dot.classList.toggle('active', idx === currentIndex));
+
+            prevBtn.disabled = (currentIndex === 0);
+            nextBtn.disabled = (currentIndex === imageData.length - 1);
+        }
+
+        function autoChange() {
+            if (!isReversing) {
+                if (currentIndex < imageData.length - 1) {
+                    currentIndex++;
+                } else {
+                    isReversing = true;
+                    currentIndex--;
+                }
+            } else {
+                if (currentIndex > 0) {
+                    currentIndex--;
+                } else {
+                    isReversing = false;
+                    currentIndex++;
+                }
+            }
+            updateDisplay();
+        }
+
+        function manualChange(index) {
+            if (index < 0) index = 0;
+            if (index >= imageData.length) index = imageData.length - 1;
+            currentIndex = index;
+            isReversing = (currentIndex === imageData.length - 1);
+            updateDisplay();
+            startTimer();
+        }
+
+        function enableSwipe() {
+            let startX = 0;
+            let isDragging = false;
+            
+            const handleStart = (e) => {
+                startX = e.type.includes('mouse') ? e.pageX : e.touches[0].pageX;
+                isDragging = true;
+            };
+            
+            const handleEnd = (e) => {
+                if (!isDragging) return;
+                const endX = e.type.includes('mouse') ? e.pageX : e.changedTouches[0].pageX;
+                const diff = startX - endX;
+                
+                if (Math.abs(diff) > 50) {
+                    manualChange(diff > 0 ? currentIndex + 1 : currentIndex - 1);
+                }
+                isDragging = false;
+            };
+            
+            swipeArea.addEventListener('mousedown', handleStart);
+            swipeArea.addEventListener('mouseup', handleEnd);
+            swipeArea.addEventListener('mouseleave', () => isDragging = false);
+            swipeArea.addEventListener('touchstart', handleStart, { passive: true });
+            swipeArea.addEventListener('touchend', handleEnd, { passive: true });
+        }
+
+        function startTimer() {
+            if (autoPlayTimer) clearInterval(autoPlayTimer);
+            autoPlayTimer = setInterval(autoChange, 6000);
+        }
+
+        prevBtn.onclick = () => manualChange(currentIndex - 1);
+        nextBtn.onclick = () => manualChange(currentIndex + 1);
+
+        window.addEventListener('load', initGallery);
+    </script>
+    <script type="text/javascript">
+        var Tawk_API=Tawk_API||{}, Tawk_LoadStart=new Date();
+        (function(){
+            var s1=document.createElement("script"),s0=document.getElementsByTagName("script")[0];
+            s1.async=true;
+            s1.src='https://embed.tawk.to/6992b11559a4151c386c35c5/1jhig7fot';
+            s1.charset='UTF-8';
+            s1.setAttribute('crossorigin','*');
+            s0.parentNode.insertBefore(s1,s0);
+        })();
+    </script>
+</body>
+</html>
