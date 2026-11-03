@@ -1,0 +1,1003 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>5FWORKSHOP - ZINE816/獨立誌工具</title>  
+    <link rel="icon" type="image/png" href="favicon/favicon-96x96.png" sizes="96x96" />
+    <link rel="icon" type="image/svg+xml" href="favicon/favicon.svg" />
+    <link rel="shortcut icon" href="favicon/favicon.ico" />
+    <link rel="apple-touch-icon" sizes="180x180" href="favicon/apple-touch-icon.png" />
+    <link rel="manifest" href="favicon/site.webmanifest" />
+    <meta name="apple-mobile-web-app-capable" content="yes">  
+    <meta name="description" content="[ 野營 X 器物 製造室 ]">
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://5fworkshop.com/">
+    <meta property="og:title" content="5FWORKSHOP">
+    <meta property="og:description" content="[ 野營 X 器物 製造室 ]">
+    <meta property="og:image" content="https://5fworkshop.com/img/5fworkshop-og.jpg">
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:url" content="https://5fworkshop.com/">
+    <meta name="twitter:title" content="5FWORKSHOP">
+    <meta name="twitter:description" content="[ 野營 X 器物 製造室 ]">
+    <meta name="twitter:image" content="https://5fworkshop.com/img/5fworkshop-og.jpg">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Special+Elite&family=Noto+Sans+TC:wght@400;700;900&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --primary-bg: #FFFDFA;
+            --accent-gold: #c9a961;
+            --text-dark: #1a1a1a;
+            --border-color: #666666;
+            --header-h: 60px;
+            --content-width: 50%;
+        }
+        
+        html {
+            overflow-y: scroll;
+            scroll-behavior: smooth;
+            -webkit-text-size-adjust: 100%;
+        }
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Special Elite', 'Noto Sans TC', "Microsoft JhengHei", sans-serif;
+            background: var(--primary-bg);
+            color: var(--text-dark);
+            line-height: 1.5;
+            overflow-x: hidden;
+            display: flex;
+            flex-direction: column;
+            min-height: 100vh;
+            -webkit-font-smoothing: antialiased;
+        }
+
+        header {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: var(--header-h);
+            background: rgba(255, 255, 255, 0.4);
+            backdrop-filter: blur(25px);
+            -webkit-backdrop-filter: blur(25px);
+            z-index: 2000;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 0 20px;
+        }
+
+        nav {
+            width: 100%;
+            max-width: 1400px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            position: relative;
+            height: 100%;
+        }
+
+        .floating-logo {
+            position: absolute;
+            left: 0;
+            top: 12px;
+            z-index: 3000;
+            text-decoration: none;
+            display: flex;
+            align-items: center;
+        }
+
+        .floating-logo img {
+            height: 70px;
+            width: auto;
+            display: block;
+            transition: height 0.3s ease-out;
+            filter: drop-shadow(0 2px 4px rgba(0,0,0,0.1));
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 3rem;
+            list-style: none;
+            align-items: center;
+        }
+
+        .nav-links a {
+            text-decoration: none;
+            color: var(--text-dark);
+            font-size: 1.3rem;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            padding: 2px 0;
+            border-bottom: 1.5px solid transparent;
+            transition: color 0.2s ease, border-bottom 0.2s ease;
+            line-height: 1.2;
+        }
+
+        .nav-links a:hover {
+            border-bottom: 1.5px solid var(--text-dark);
+        }
+
+        .menu-toggle {
+            display: none;
+            flex-direction: column;
+            gap: 6px;
+            cursor: pointer;
+            z-index: 3100;
+            position: absolute;
+            right: 0;
+            padding: 10px 5px;
+        }
+
+        .menu-toggle span {
+            width: 28px;
+            height: 2px;
+            background-color: var(--text-dark);
+            transition: 0.3s cubic-bezier(0.45, 0, 0.25, 1);
+        }
+
+        main {
+            padding: 0 20px 0 20px;
+            max-width: 1400px;
+            margin: 0 auto;
+            width: 100%;
+            flex: 1;
+        }
+        
+        .product-header-box {
+            padding-top: 4.3rem;		
+            width: var(--content-width);
+            margin: 0.5rem auto 0 auto;
+            text-align: left;
+        }
+        
+        .product-name {
+            font-family: 'Noto Sans TC', sans-serif;
+            font-size: 1.6rem;
+            letter-spacing: 0.05em;
+            font-weight: 900;
+            color: var(--text-dark);
+        }
+        
+        .hero-container {
+            position: relative;
+            width: var(--content-width);
+            margin: 0.5rem auto 0.5rem auto;
+        }
+        
+        .hero-section {
+            position: relative;
+            width: 100%;
+            aspect-ratio: 4 / 3;
+            background: #fdfdfd;
+            overflow: hidden;
+            border: 1px solid #eeeeee;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: grab;
+            touch-action: pan-y;
+        }
+        
+        .main-display-img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: opacity 0.3s ease-in-out;
+            pointer-events: none;
+            user-select: none;
+        }
+        
+        .image-counter {
+            position: absolute;
+            background: rgba(255, 255, 255, 0.8);
+            min-width: 50px;
+            height: 28px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 0.85rem;
+            font-weight: bold;
+            color: var(--text-dark);
+            border-radius: 2px;
+            z-index: 5;
+            letter-spacing: 1px;
+            pointer-events: none;
+            padding: 0 8px;
+        }
+        
+        .hero-section .image-counter {
+            top: 10px;
+            right: 10px;
+        }
+        
+        .nav-arrow {
+            position: absolute;
+            top: 50%;
+            transform: translateY(-50%);
+            background: rgba(255,255,255,0.8);
+            border: none;
+            width: 40px;
+            height: 40px;
+            cursor: pointer;
+            border-radius: 50%;
+            font-size: 1.2rem;
+            z-index: 10;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        
+        .arrow-prev {
+            left: -50px;
+        }
+        
+        .arrow-next {
+            right: -50px;
+        }
+
+        .gallery-wrapper {
+            width: var(--content-width);
+            margin: 0 auto;
+            overflow: hidden;
+            position: relative;
+        }
+        
+        .gallery-nav {
+            display: flex;
+            gap: 10px;
+            padding: 8px 2px;
+            overflow-x: auto;
+            scroll-behavior: smooth;
+            scrollbar-width: none;
+            -webkit-overflow-scrolling: touch;
+            cursor: grab;
+            user-select: none;
+            justify-content: flex-start;
+        }
+        
+        .gallery-nav::-webkit-scrollbar {
+            display: none;
+        }
+        
+        .thumb-box {
+            width: 44px;
+            height: 44px;
+            flex: 0 0 44px;
+            cursor: pointer;
+            border: 1px solid #eeeeee;
+            opacity: 1;
+            transition: border 0.2s ease;
+        }
+        
+        .thumb-box img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            pointer-events: none;
+            display: block;
+        }
+        
+        .thumb-box.active {
+            border: 3px solid var(--accent-gold);
+            z-index: 2;
+        }
+
+        .divider {
+            width: var(--content-width);
+            height: 1px;
+            background-color: #C9A961;
+            margin: 0.2rem auto;
+            margin-bottom: 1rem;
+        }
+
+        .product-info-section {
+            width: var(--content-width);
+            margin: 2rem auto 1rem auto;
+            text-align: left;
+            color: var(--text-dark);
+            font-size: 0.9rem;
+            font-family: 'Noto Sans TC', sans-serif;
+            letter-spacing: 0.02em;
+        }
+               
+        .accordion-header {
+            width: 100%;
+            padding: 5px 15px;
+            background: #C9A961;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            cursor: pointer;
+            border: 0;
+            font-family: 'Noto Sans TC', sans-serif;
+            font-weight: 700;
+            font-size: 1rem;
+            color: var(--text-dark);
+            transition: background 0.3s;
+            margin-bottom: 0;
+        }
+        
+        .accordion-header:hover {
+            background: #d4b87a;
+        }
+        
+        .accordion-header .arrow {
+            font-size: 0.8rem;
+            transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+        
+        .accordion-content {
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+            background: #000;
+        }
+
+        .info-group {
+            margin-bottom: 2.5rem;
+        }
+        
+        .info-title {
+            font-weight: 700;
+            font-size: 1rem;
+            margin-bottom: 0.4rem;
+            display: block;
+		    text-align: center;
+        }
+        
+        .info-content {
+            white-space: pre-line;
+            margin-bottom: 0.5rem;
+			text-align: center;
+        }
+
+        .zine-article {
+            text-align: left;
+            line-height: 1.9;
+            margin-top: 4rem;
+        }
+
+        .zine-article .info-title {
+            text-align: center;
+            margin-bottom: 1.2rem;
+        }
+
+        .zine-article h3 {
+            font-size: 1.05rem;
+            font-weight: 700;
+            margin: 1.8rem 0 0.6rem;
+        }
+
+        .zine-article p {
+            margin: 0 0 1rem;
+            text-align: justify;
+            text-justify: inter-ideograph;
+        }
+
+        .zine-article .article-ending {
+            margin-top: 1.5rem;
+            font-weight: 700;
+        }
+        
+        .number-box {
+            border: 1px solid var(--accent-gold);
+            padding: 15px 5px;
+            background-color: #FFFDFA;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            width: 100%;
+            border-radius: 4px;
+            font-family: 'Special Elite', serif;
+            font-size: 0.9rem;
+            letter-spacing: 1.2px;
+            color: #262626;
+            margin-bottom: 1rem;
+        }
+        
+        .cust-image-container {
+            width: 100%;
+            text-align: center;
+            margin: 1rem 0;
+        }
+        
+        .cust-image-container img {
+            max-width: 100%;
+            height: auto;
+            display: inline-block;
+        }
+
+        .inner-divider {
+            width:95%;
+            height: 1px;
+            background-color: #C9A961;
+            margin: 1.2rem 0;
+            opacity: 1;
+        }
+
+        .get-yours-header {
+            position: relative;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-bottom: 1rem;
+            width: 100%;
+        }
+        
+        .get-yours-title {
+            font-family: 'Special Elite', serif;
+            font-size: 1.3rem;
+            color: var(--text-dark);
+            background-color: #FFFDFA;
+            padding: 0 10px;
+            position: relative;
+            z-index: 2;
+        }
+        
+        .get-yours-container {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 15px;
+            flex-wrap: wrap;
+            width: 100%;
+            margin: 0 auto;
+            margin-bottom: 5rem;
+        }
+        
+        .buy-btn {
+            text-decoration: none;
+            padding: 12px 20px;
+            border-radius: 3px;
+            font-size: 1rem;
+            transition: all 0.3s ease;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            min-width: 240px;
+            justify-content: center;
+            font-family: 'Noto Sans TC', sans-serif;
+            background: #000000;
+            color: #FFFFFF;
+            border: none;
+            font-weight: 700;
+        }
+        
+        .buy-btn:hover {
+            background: #FE0000;
+            color: #FFFDFA;
+        }
+        
+        .reserve-btn {
+            padding: 8px 18px;
+            border-radius: 30px;
+            font-size: 0.95rem;
+            transition: all 0.3s ease;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            font-family: 'Noto Sans TC', sans-serif;
+            background: var(--accent-gold);
+            color: var(--text-dark);
+            border: 2px solid var(--accent-gold);
+            font-weight: 700;
+            cursor: pointer;
+            margin: 1rem 0 0.5rem 0;
+        }
+        
+        .reserve-btn:hover {
+            background: #d4b87a;
+            border-color: #d4b87a;
+            transform: translateY(-2px);
+            box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+        }
+        
+        .social-footer-wrapper {
+            width: 100%;
+            padding: 4rem 0 1rem 0;
+            background-color: var(--primary-bg);
+        }
+        
+        .social-links {
+            display: flex;
+            justify-content: center;
+            gap: 35px;
+            width: 100%;
+        }
+        
+        .social-links img {
+            width: 30px;
+            height: 30px;
+            opacity: 0.8;
+            transition: all 0.3s;
+        }
+        
+        .social-links a:hover img {
+            opacity: 1;
+            transform: scale(1.1);
+        }
+        
+        .lightbox {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.94);
+            z-index: 2147483647;
+            display: none;
+            align-items: center;
+            justify-content: center;
+            opacity: 0;
+            transition: opacity 0.4s ease;
+            backdrop-filter: blur(5px);
+            cursor: pointer;
+        }
+        
+        .lightbox.active {
+            display: flex;
+            opacity: 1;
+        }
+        
+        .lightbox-container {
+            position: relative;
+            max-width: 95vw;
+            max-height: 90vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: grab;
+            touch-action: none;
+        }
+        
+        .lightbox img {
+            max-width: 95vw;
+            max-height: 90vh;
+            object-fit: contain;
+            pointer-events: none;
+            user-select: none;
+            -webkit-user-drag: none;
+        }
+        
+        .lightbox .image-counter {
+            top: 20px;
+            right: 20px;
+        }
+
+        footer {
+            padding: 1.3rem 0;
+            text-align: center;
+        }
+        
+        footer p {
+            font-size: 0.85rem;
+            color: #262626;
+        }
+
+        @media (max-width: 1024px) {
+            nav,
+            .product-header-box,
+            .hero-container,
+            .gallery-wrapper,
+            .divider,
+            .product-info-section {
+                width: 97%;
+            }
+            
+            header {
+                padding: 0 15px;
+            }
+            
+            .floating-logo {
+                left: 0;
+                top: 50%;
+                transform: translateY(-50%);
+            }
+            
+            .floating-logo img {
+                height: 38px !important;
+            }
+            
+            .menu-toggle {
+                display: flex;
+                position: absolute;
+                right: 0;
+                top: 50%;
+                transform: translateY(-50%);
+                z-index: 10000000;
+            }
+            
+            .nav-links {
+                position: fixed;
+                top: 0;
+                right: -100%;
+                width: 100%;
+                height: 100vh;
+                background: rgba(255, 255, 255, 0.98);
+                backdrop-filter: blur(15px);
+                flex-direction: column;
+                justify-content: flex-start;
+                padding-top: 120px;
+                gap: 2.5rem;
+                transition: 0.4s cubic-bezier(0.165, 0.84, 0.44, 1);
+                z-index: 9999999;
+            }
+            
+            .nav-links.active {
+                right: 0;
+            }
+            
+            .nav-links a {
+                font-size: 1.6rem;
+                font-weight: 700;
+                letter-spacing: 4px;
+            }
+
+            .menu-toggle.active span:nth-child(1) {
+                transform: translateY(8px) rotate(45deg);
+            }
+            
+            .menu-toggle.active span:nth-child(2) {
+                opacity: 0;
+            }
+            
+            .menu-toggle.active span:nth-child(3) {
+                transform: translateY(-8px) rotate(-45deg);
+            }
+
+            .arrow-prev {
+                left: 5px;
+            }
+            
+            .arrow-next {
+                right: 5px;
+            }
+            
+            .product-name {
+                font-size: 1.8rem;
+            }
+            
+            .product-info-section {
+                font-size: 1.05rem;
+            }
+            
+            .info-title {
+                font-size: 1.15rem;
+            }
+            
+            .number-box {
+                font-size: 1.05rem;
+                padding: 30px 15px;
+            }
+            
+            .buy-btn {
+                width: 100%;
+                min-width: unset;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header id="header">
+        <nav>
+            <a href="index.html" class="floating-logo" aria-label="回到首頁">
+                <img src="img/logo.webp" alt="5FWORKSHOP Logo">
+            </a>
+            <ul class="nav-links" id="navLinks">
+                <li><a href="index.html#top">TOP</a></li>
+                <li><a href="index.html#works">WORKS</a></li>
+                <li><a href="index.html#about">ABOUT</a></li>
+            </ul>
+            <div class="menu-toggle" id="menuToggle" aria-label="選單開關">
+                <span></span>
+                <span></span>
+                <span></span>
+            </div>
+        </nav>
+    </header>
+
+    <main>
+        <div class="product-header-box">
+            <h1 class="product-name">ZINE816 / 獨立誌工具</h1>
+        </div>
+
+        <div class="hero-container">
+            <button class="nav-arrow arrow-prev" id="prevBtn" aria-label="上一張圖片">&#10094;</button>
+            <div class="hero-section" id="heroTrigger">
+                <div class="image-counter" id="imgCounter">1 / 1</div>
+                <img src="" id="mainImage" class="main-display-img" alt="minime 小物桌">
+            </div>
+            <button class="nav-arrow arrow-next" id="nextBtn" aria-label="下一張圖片">&#10095;</button>
+        </div>
+
+        <div class="gallery-wrapper">
+            <div class="gallery-nav" id="thumbNav"></div>
+        </div>
+
+        <div class="product-info-section">
+           
+            <div class="info-group">
+                <span class="info-title"> — ZINE816 — </span>
+                <div class="info-content">免註冊、免上傳，將一張隨手畫下的塗鴉、一段想留下的文字，或幾張捨不得只放在螢幕裡的照片，排成 8 格或 16 格的小誌，將腦中的想法變成可以拿在手上、分享給朋友的作品。</div>
+            </div>
+			
+            <div class="get-yours-container">
+                <a href="https://5fworkshop.com/zine816.html" target="new" rel="noopener noreferrer" class="buy-btn">
+                    <span>開啟APP</span>
+                </a>
+            </div>	
+
+            <div class="info-group zine-article">		
+                <span class="info-title"> — 認識 ZINE — </span>
+
+                <h3>什麼是 Zine？</h3>
+                <p>Zine(獨立刊物)是一種以自主出版為核心的小型出版品，通常由創作者自行策劃、設計、製作與發行。無論是透過手工裝訂、影印，或運用數位工具編排印製，Zine 都展現了創作者對內容與形式的自由掌握。</p>
+                <p>不同於傳統商業出版，Zine 不受市場機制與主流編輯框架的限制，強調 DIY(Do It Yourself)的精神，以及獨立、自由的創作理念。內容涵蓋範圍十分廣泛，從個人故事、日常觀察，到藝術、攝影、詩歌、音樂與社會議題，都能成為創作的起點。</p>
+                <p>Zine 最迷人的地方，在於它沒有固定的形式或標準。每一本刊物都能呈現創作者獨特的個性、觀點與美學，讓出版成為一種自由而多元的表達方式。</p>
+
+                <h3>Zine 的定義</h3>
+                <p>「Zine」一詞源自「Fanzine」，是「Fan Magazine」(粉絲雜誌)的縮寫。最初，人們透過自製刊物分享對特定文化、作品或興趣的熱愛，逐漸發展出獨立出版的文化。</p>
+                <p>傳統上，Zine 多以影印機或家用印表機複製，也可能完全以手繪、打字或數位設計完成。從紙張選擇、版面編排到裝訂方式，創作者都能依照自己的想法自由決定。</p>
+                <p>這些出版品通常帶有鮮明的 DIY 美學，不刻意追求商業出版的精緻與完美，而是保留手工製作的痕跡、實驗性的排版，以及各種意想不到的創意。形式可以是單張摺頁、小冊子，也可以是結合文字、攝影、插畫與拼貼的複合式創作。</p>
+
+                <h3>Zine 的歷史</h3>
+                <p>Zine 的發展與獨立出版文化息息相關，其歷史可以追溯至 20 世紀初期的同人出版活動。早期的科幻同人雜誌(Science Fiction Fanzines)，多由一群熱愛科幻文化的讀者自行編輯、印製與發行，藉此分享故事、插畫、評論及彼此的創作。</p>
+                <p>與此同時，20 世紀 20 至 30 年代的哈林文藝復興(Harlem Renaissance)，也孕育了許多由非裔美國人創辦的獨立刊物。1917 年創刊的《The Messenger》，以探討黑人政治、社會議題與文化創作而聞名；1926 年出版的《FIRE!!》雖然僅發行一期，卻在非裔美國文學與藝術發展史上留下重要的影響。</p>
+                <p>到了 1970 至 1980 年代，Zine 隨著龐克搖滾(Punk Rock)與地下文化的興起而蓬勃發展。當時的龐克刊物經常採用粗獷、拼貼與不拘一格的視覺風格，以直接、不妥協的方式表達對主流文化與社會規範的反叛，也成為地下音樂場景與次文化社群交流的重要媒介。</p>
+                <p>1990 年代，女性主義龐克運動 Riot Grrrl 的興起，進一步拓展了 Zine 的文化影響力。許多女性創作者透過自製刊物，討論性別、權力、身體自主與社會不平等，為長期缺乏發聲空間的群體建立了自主表達的平台。</p>
+                <p>時至今日，Zine 已發展成為全球獨立出版與藝術創作文化的重要一環。它不只是分享作品的媒介，也讓不同背景的創作者與讀者得以建立連結，形成具有共同理念與認同感的創作社群。</p>
+
+                <h3>Zine 的目的與意義</h3>
+                <p>Zine 不只是一本刊物，更是一種自由表達與分享想法的方式。</p>
+                <p>對創作者而言，Zine 提供了一個不受傳統出版制度限制的創作空間。無論是個人經歷、生活觀察、藝術實驗，或是對社會議題的思考，都能透過自己的方式呈現，不必迎合市場，也不需要經過商業出版機構的篩選。</p>
+                <p>對讀者而言，Zine 則提供了接觸不同觀點與小眾文化的機會。許多在主流媒體中較少被討論的議題，能夠透過獨立刊物被看見、被分享。</p>
+                <p>此外，Zine 也是連結創作者與社群的重要媒介。透過交換、分享、展售與共同創作，人們得以認識志同道合的夥伴，讓原本獨立的創作逐漸形成更豐富的文化交流網絡。</p>
+
+                <h3>Zine 的特色</h3>
+                <p><strong>1. 自由且多元的形式</strong><br> Zine 沒有固定的尺寸、頁數或裝訂規範。從口袋大小的摺頁小冊，到接近標準雜誌尺寸的出版品，都可以是 Zine。創作者能依照內容與創作理念，自由決定刊物的呈現方式。</p>
+                <p><strong>2. 獨特的 DIY 美學</strong><br>手工裁切、影印痕跡、拼貼、手寫字體與不規則的版面配置，都是 Zine 常見的視覺元素。它不追求商業出版的完美，而是珍惜製作過程中留下的個性與手感。無論是黑白印刷或全彩呈現，都能發展出獨特的風格。</p>
+                <p><strong>3. 不受限制的創作內容</strong><br>由於不必迎合商業市場或主流媒體的需求，Zine 能夠自由探索各種主題。從藝術、音樂、攝影、文學，到個人生活、次文化、政治與社會議題，甚至是較為小眾或具爭議性的內容，都能成為創作的一部分。</p>
+                <p><strong>4. 強調個人觀點與獨立精神</strong><br>每一本 Zine 都是創作者觀點的延伸。它不需要遵循既定的出版規則，也不必追求大眾認同，而是鼓勵每個人以自己的方式記錄、創作與分享。</p>
+                <p><strong>5. 建立交流與社群連結</strong><br>Zine 的價值不只存在於刊物本身，也存在於創作者與讀者之間的交流。透過獨立書店、Zine 展覽、市集、交換活動與線上社群，這些小型出版品成為連結不同創作者與文化群體的橋梁。</p>
+
+                <p class="article-ending">Zine 的魅力，或許就在於它始終保有一種純粹的創作自由：任何人都可以是創作者，任何想法都值得被記錄，而每一本小小的刊物，都可能成為與世界交流的起點。</p>
+            </div>		
+        </div>
+    </main>
+
+    <div class="social-footer-wrapper">
+        <div class="social-links">
+            <a href="https://www.instagram.com/5fworkshop" target="_blank" rel="noopener noreferrer" aria-label="Instagram">
+                <img src="img/instagram.svg" alt="Instagram">
+            </a>
+            <a href="https://lin.ee/PsVtYEHu" target="_blank" rel="noopener noreferrer" aria-label="Line">
+                <img src="img/line.svg" alt="Line">
+            </a>
+        </div>
+    </div>
+
+    <div class="lightbox" id="lightbox">
+        <div class="lightbox-container" id="lboxContainer">
+            <div class="image-counter" id="imgCounterLbox">1 / 1</div>
+            <img src="" id="lightboxImg" alt="放大檢視">
+        </div>
+    </div>
+
+    <footer>
+        <p>© 2026 5FWORKSHOP. ALL RIGHTS RESERVED.</p>
+    </footer>
+
+    <script>
+        const menuToggle = document.getElementById('menuToggle');
+        const navLinks = document.getElementById('navLinks');
+        const navItems = document.querySelectorAll('.nav-links a');
+
+        menuToggle.addEventListener('click', () => {
+            menuToggle.classList.toggle('active');
+            const isActive = navLinks.classList.toggle('active');
+            document.body.style.overflow = isActive ? 'hidden' : 'auto';
+
+            if (typeof Tawk_API !== 'undefined') {
+                if (isActive) {
+                    Tawk_API.hideWidget();
+                } else {
+                    Tawk_API.showWidget();
+                }
+            }
+        });
+
+        navItems.forEach(item => {
+            item.addEventListener('click', () => {
+                menuToggle.classList.remove('active');
+                navLinks.classList.remove('active');
+                document.body.style.overflow = 'auto';
+                
+                if (typeof Tawk_API !== 'undefined') {
+                    Tawk_API.showWidget();
+                }
+            });
+        });
+
+        const accordionToggle = document.getElementById('accordionToggle');
+
+
+        const imageFolder = 'img/zine816/';
+        const imageFiles = [
+            'z816_00.webp', 'z816_01.webp', 'z816_02.webp', 'z816_03.webp', 'z816_04.webp', 'z816_05.webp', 'z816_06.webp', 'z816_07.webp',
+        ];
+        let imageList = [];
+        let currentIndex = 0;
+        
+        const mainImg = document.getElementById('mainImage');
+        const thumbNav = document.getElementById('thumbNav');
+        const imgCounter = document.getElementById('imgCounter');
+        const imgCounterLbox = document.getElementById('imgCounterLbox');
+        const lboxContainer = document.getElementById('lboxContainer');
+        const heroTrigger = document.getElementById('heroTrigger');
+        const lightbox = document.getElementById('lightbox');
+
+        function initGallery() {
+            imageList = imageFiles.sort((a, b) => a.localeCompare(b, undefined, {numeric: true}));
+            
+            imageList.forEach((file, index) => {
+                const thumb = document.createElement('div');
+                thumb.className = 'thumb-box';
+                thumb.id = `thumb-${index}`;
+                thumb.onclick = () => changeImage(index);
+                thumb.setAttribute('role', 'button');
+                thumb.setAttribute('aria-label', `切換到第 ${index + 1} 張圖片`);
+                thumb.innerHTML = `<img src="${imageFolder}${file}" alt="縮圖 ${index + 1}">`;
+                thumbNav.appendChild(thumb);
+            });
+            
+            enableDragScroll();
+            bindSwipeEvents(heroTrigger, true);
+            bindSwipeEvents(lboxContainer, false);
+            changeImage(0);
+        }
+
+        function changeImage(index) {
+            if (index < 0) index = imageList.length - 1;
+            if (index >= imageList.length) index = 0;
+            
+            currentIndex = index;
+            const newSrc = imageFolder + imageList[currentIndex];
+            
+            mainImg.src = newSrc;
+            mainImg.alt = `minime 小物桌圖片 ${currentIndex + 1}`;
+            document.getElementById('lightboxImg').src = newSrc;
+            
+            const counterText = `${currentIndex + 1} / ${imageList.length}`;
+            imgCounter.innerText = counterText;
+            imgCounterLbox.innerText = counterText;
+            
+            document.querySelectorAll('.thumb-box').forEach(el => el.classList.remove('active'));
+            const activeThumb = document.getElementById(`thumb-${currentIndex}`);
+            activeThumb?.classList.add('active');
+            activeThumb?.scrollIntoView({ behavior: 'smooth', block: 'nearest', inline: 'center' });
+        }
+
+        function bindSwipeEvents(element, isHero) {
+            let startX = 0;
+            let startTime = 0;
+            let isDragging = false;
+            const threshold = 50;
+            const timeLimit = 250;
+
+            const start = (x) => {
+                startX = x;
+                startTime = Date.now();
+                isDragging = true;
+            };
+
+            const end = (x) => {
+                if (!isDragging) return;
+                const diffX = startX - x;
+                const duration = Date.now() - startTime;
+
+                if (Math.abs(diffX) < 10 && duration < timeLimit) {
+                    if (isHero) lightbox.classList.add('active');
+                } else if (Math.abs(diffX) > threshold) {
+                    changeImage(diffX > 0 ? currentIndex + 1 : currentIndex - 1);
+                }
+                isDragging = false;
+            };
+
+            element.addEventListener('mousedown', (e) => {
+                e.preventDefault();
+                start(e.pageX);
+            });
+            
+            window.addEventListener('mouseup', (e) => {
+                if(isDragging) end(e.pageX);
+            });
+            
+            element.addEventListener('touchstart', (e) => {
+                start(e.touches[0].pageX);
+            }, {passive: true});
+            
+            element.addEventListener('touchend', (e) => {
+                end(e.changedTouches[0].pageX);
+            });
+        }
+
+        function enableDragScroll() {
+            let isDown = false;
+            let startX;
+            let scrollLeft;
+            
+            thumbNav.addEventListener('mousedown', (e) => {
+                isDown = true;
+                startX = e.pageX - thumbNav.offsetLeft;
+                scrollLeft = thumbNav.scrollLeft;
+                thumbNav.style.scrollBehavior = 'auto';
+            });
+            
+            thumbNav.addEventListener('mouseleave', () => {
+                isDown = false;
+            });
+            
+            thumbNav.addEventListener('mouseup', () => {
+                isDown = false;
+                thumbNav.style.scrollBehavior = 'smooth';
+            });
+            
+            thumbNav.addEventListener('mousemove', (e) => {
+                if (!isDown) return;
+                e.preventDefault();
+                const x = e.pageX - thumbNav.offsetLeft;
+                thumbNav.scrollLeft = scrollLeft - (x - startX) * 2;
+            });
+        }
+
+        lightbox.onclick = (e) => {
+            if (e.target === lightbox) lightbox.classList.remove('active');
+        };
+        
+        document.getElementById('nextBtn').onclick = (e) => {
+            e.stopPropagation();
+            changeImage(currentIndex + 1);
+        };
+        
+        document.getElementById('prevBtn').onclick = (e) => {
+            e.stopPropagation();
+            changeImage(currentIndex - 1);
+        };
+        
+        initGallery();
+        
+        function openTawkChat() {
+            if (typeof Tawk_API !== 'undefined' && Tawk_API.maximize) {
+                Tawk_API.maximize();
+            } else {
+                setTimeout(() => {
+                    if (typeof Tawk_API !== 'undefined' && Tawk_API.maximize) {
+                        Tawk_API.maximize();
+                    }
+                }, 1000);
+            }
+        }
+    </script>
+    <script type="text/javascript">
+        var Tawk_API=Tawk_API||{}, Tawk_LoadStart=new Date();
+        (function(){
+            var s1=document.createElement("script"),s0=document.getElementsByTagName("script")[0];
+            s1.async=true;
+            s1.src='https://embed.tawk.to/6992b11559a4151c386c35c5/1jhig7fot';
+            s1.charset='UTF-8';
+            s1.setAttribute('crossorigin','*');
+            s0.parentNode.insertBefore(s1,s0);
+        })();
+    </script>
+</body>
+</html>
